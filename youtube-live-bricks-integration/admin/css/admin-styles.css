@@ -1,0 +1,79 @@
+.ylbi-settings-wrap {
+    max-width: 800px;
+    margin: 20px 0;
+}
+
+.ylbi-status-panel {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.ylbi-status-panel h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.status-indicator {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 15px 0;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-dot.live {
+    background-color: #46b450;
+    box-shadow: 0 0 8px rgba(70, 180, 80, 0.5);
+}
+
+.status-dot.offline {
+    background-color: #dc3232;
+    box-shadow: 0 0 8px rgba(220, 50, 50, 0.5);
+}
+
+.last-check {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+#ylbi-check-now {
+    margin-bottom: 10px;
+}
+
+.ylbi-settings-form {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.form-table th {
+    width: 200px;
+}
+
+.notice {
+    margin: 20px 0;
+}
+
+/* Loading state */
+.checking {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+#ylbi-check-now.checking::after {
+    content: '...';
+}
