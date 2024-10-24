@@ -10,6 +10,17 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Integrates YouTube Live streaming status with Bricks Builder for dynamic content based on channel live status.
 
+
+== DISCLAIMER ==
+
+DO NOT, UNDER ANY CIRCUMSTANCE, USE THIS PLUGIN ON A PRODUCTION WEBSITE WITHOUT APPROPRIATELY VETTING IT FIRST.
+
+I PROMPTED CLUADE TO BUILD THIS AND I AM AN IDIOT.
+
+I CAN NOT AND WILL NOT BE HELD LIABLE IF YOU DECIDE TO USE THIS CODE AND YOUR SHIT GETS FUCKED.
+
+YOU HAVE BEEN WARNED!
+
 == Description ==
 
 YouTube Live Bricks Integration allows you to create dynamic content in Bricks Builder based on your YouTube channel's live streaming status. Show or hide elements based on whether your channel is currently live, and automatically display live stream URLs using dynamic tags.
