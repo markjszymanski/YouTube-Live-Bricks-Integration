@@ -7,19 +7,35 @@ class YLBI_Cron_Manager {
      * Constructor
      */
     public function __construct() {
-        add_action('init', array($this, 'register_cron_schedules'));
+        // Register custom intervals
+        add_filter('cron_schedules', array($this, 'register_cron_schedules'));
+        
+        // Hook for running the check
         add_action('ylbi_check_youtube_status', array($this, 'run_status_check'));
+        
+        // Hook for scheduling/rescheduling
         add_action('ylbi_schedule_status_check', array($this, 'schedule_status_check'));
+        
+        // Hook into frequency option changes
         add_action('update_option_ylbi_check_frequency', array($this, 'reschedule_on_frequency_change'), 10, 2);
     }
 
     /**
      * Register custom cron intervals
-     *
-     * @param array $schedules
-     * @return array
      */
     public function register_cron_schedules($schedules) {
+        // Add new shorter intervals
+        $schedules['ylbi_1min'] = array(
+            'interval' => 60,
+            'display' => __('Every minute', 'youtube-live-bricks-integration')
+        );
+        
+        $schedules['ylbi_2min'] = array(
+            'interval' => 120,
+            'display' => __('Every 2 minutes', 'youtube-live-bricks-integration')
+        );
+        
+        // Existing intervals
         $schedules['ylbi_5min'] = array(
             'interval' => 300,
             'display' => __('Every 5 minutes', 'youtube-live-bricks-integration')
@@ -46,7 +62,7 @@ class YLBI_Cron_Manager {
         $result = $youtube_api->check_live_status();
         
         if (!$result['success']) {
-            YouTube_Live_Bricks_Integration::log_error('Scheduled check failed: ' . $result['message']);
+            ylbi_log_error('Scheduled check failed: ' . $result['message']);
         }
     }
 
@@ -60,7 +76,7 @@ class YLBI_Cron_Manager {
         // Clear any existing schedule
         wp_clear_scheduled_hook('ylbi_check_youtube_status');
         
-        // Schedule new check
+        // Schedule new recurring check
         if (!wp_next_scheduled('ylbi_check_youtube_status')) {
             wp_schedule_event(time(), $schedule, 'ylbi_check_youtube_status');
         }
@@ -68,9 +84,6 @@ class YLBI_Cron_Manager {
 
     /**
      * Reschedule when frequency is changed
-     *
-     * @param mixed $old_value
-     * @param mixed $new_value
      */
     public function reschedule_on_frequency_change($old_value, $new_value) {
         if ($old_value !== $new_value) {
@@ -80,12 +93,13 @@ class YLBI_Cron_Manager {
 
     /**
      * Get schedule name based on frequency
-     *
-     * @param string $frequency Frequency in seconds
-     * @return string
      */
     private function get_schedule_name($frequency) {
         switch ($frequency) {
+            case '60':
+                return 'ylbi_1min';
+            case '120':
+                return 'ylbi_2min';
             case '300':
                 return 'ylbi_5min';
             case '600':

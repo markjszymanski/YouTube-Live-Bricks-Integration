@@ -165,6 +165,12 @@ class YLBI_Admin_Menu {
                         </th>
                         <td>
                             <select id="check_frequency" name="ylbi_check_frequency">
+                                <option value="60" <?php selected($check_frequency, '60'); ?>>
+                                    <?php _e('Every minute', 'youtube-live-bricks-integration'); ?>
+                                </option>
+                                <option value="120" <?php selected($check_frequency, '120'); ?>>
+                                    <?php _e('Every 2 minutes', 'youtube-live-bricks-integration'); ?>
+                                </option>
                                 <option value="300" <?php selected($check_frequency, '300'); ?>>
                                     <?php _e('Every 5 minutes', 'youtube-live-bricks-integration'); ?>
                                 </option>
@@ -175,6 +181,9 @@ class YLBI_Admin_Menu {
                                     <?php _e('Every 30 minutes', 'youtube-live-bricks-integration'); ?>
                                 </option>
                             </select>
+                            <p class="description">
+                                <?php _e('More frequent checks provide faster live status updates but increase server load.', 'youtube-live-bricks-integration'); ?>
+                            </p>
                         </td>
                     </tr>
                 </table>
